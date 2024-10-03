@@ -1,9 +1,8 @@
-
-
 import uvicorn
 from fastapi import FastAPI
 
-import main
+from apps.app01 import shop
+from apps.app02 import user
 
 app = FastAPI()
 
@@ -13,10 +12,8 @@ async def root():
     return {"message": "Hello World"}
 
 
-@app.get("/hello/{name}")
-async def say_hello(name: str):
-    return {"message": f"Hello {name}"}
-
+app.include_router(shop, prefix="/shop", tags=["shop"])
+app.include_router(user, prefix="/user", tags=["user"])
 
 if __name__ == '__main__':
-    uvicorn.run("main:app", host='0.0.0.0', port=8080,  reload=True, log_level='debug')
+    uvicorn.run("main:app", host='0.0.0.0', port=8080, reload=True, log_level='debug')
