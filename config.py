@@ -5,11 +5,15 @@
 """
 
 import os.path
+
+from dotenv import load_dotenv, find_dotenv
 from pydantic import BaseSettings
 from typing import List
 
 
 class Config(BaseSettings):
+    # 加载环境变量
+    load_dotenv(find_dotenv(), override=True)
     # 端口号
     PORT: int = 8080
     # 调试模式
