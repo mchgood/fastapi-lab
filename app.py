@@ -13,10 +13,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.sessions import SessionMiddleware
 from config import settings
 from fastapi.staticfiles import StaticFiles
-from api.Base import router
+from api.Base import ApiRouter
 from core.Events import startup, stopping
 from core.Exception import http_error_handler, http422_error_handler, unicorn_exception_handler, UnicornException
 from core.Middleware import Middleware
+from core.Router import AllRouter
 
 application = FastAPI(
     debug=settings.APP_DEBUG,
@@ -37,7 +38,7 @@ application.add_exception_handler(RequestValidationError, http422_error_handler)
 application.add_exception_handler(UnicornException, unicorn_exception_handler)
 
 # 路由
-application.include_router(router)
+application.include_router(AllRouter)
 
 # 中间件
 application.add_middleware(Middleware)

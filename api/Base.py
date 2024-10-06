@@ -3,9 +3,14 @@
 @Des: 基本路由
 """
 from fastapi import APIRouter
-router = APIRouter()
 
-@router.get('/')
+from api.Login import UserApiRouter
+
+ApiRouter = APIRouter(prefix="/api")
+
+ApiRouter.include_router(UserApiRouter)
+
+@ApiRouter.get('/')
 async def home(num: int):
     return {
         "num": num
