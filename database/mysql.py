@@ -23,7 +23,7 @@ DB_ORM_CONFIG = {
         },
     },
     "apps": {
-        "base": {"models": ["models.User"], "default_connection": "fastapi-lab"},
+        "base": {"models": ["models.UserPo"], "default_connection": "fastapi-lab"},
     },
     'use_tz': False,
     'timezone': 'Asia/Shanghai'
